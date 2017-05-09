@@ -12,6 +12,10 @@ from collections import OrderedDict
 
 class Comprassion:
     def __init__(self):
+        self.chain1_resis = []
+        self.chain2_resis = []
+        self.chain1_close_atms = []
+        self.chain2_close_atms = []
 
 
 path = ""
@@ -19,6 +23,7 @@ path = ""
 #parser = PDBParser()
 files = [f for f in os.listdir('.') if os.path.isfile(f) and '.pdb' in f]
 resis_on_close = []
+comprasions = []
 res_ids_onclose = {}
 analyzed_count = 0
 
@@ -44,49 +49,56 @@ for pdb_file in files:#os.listdir(path):
 
                 chain1_atms = list(chains[ch1].get_atoms())
                 chain2_atms = list(chains[ch2].get_atoms())
+
+                comp = Comprassion()
+                
+                '''
                 chain1_resis = []#lists of residues involved in contact between two chains in chain_1
                 chain2_resis = []#same as above
                 chain1_close_atms = []
                 chain2_close_atms = []
+                '''
 
                 for atm1 in chain1_atms:
                     for atm2 in chain2_atms:
                         if atm1 - atm2 <= 10.0:
                             #print atm1.get_name() + ' ' + atm2.get_name()
-                            if atm1.get_parent().get_resname() not in chain1_resis:
-                                chain1_resis.append(atm1.get_parent().get_resname())
+                            if atm1.get_parent().get_resname() not in comp.chain1_resis:
+                                comp.chain1_resis.append(atm1.get_parent().get_resname())
                             
-                            if atm2.get_parent().get_resname() not in chain2_resis:
-                                chain2_resis.append(atm2.get_parent().get_resname())
+                            if atm2.get_parent().get_resname() not in comp.chain2_resis:
+                                comp.chain2_resis.append(atm2.get_parent().get_resname())
                             
-                            if atm1.get_name() not in chain1_close_atms:
-                                chain1_close_atms.append(atm1.get_name())
+                            if atm1.get_name() not in comp.chain1_close_atms:
+                                comp.chain1_close_atms.append(atm1.get_name())
                             
-                            if atm2.get_name() not in chain2_close_atms:
-                                chain2_close_atms.append(atm2.get_name()) 
+                            if atm2.get_name() not in comp.chain2_close_atms:
+                                comp.chain2_close_atms.append(atm2.get_name()) 
                 
-                if len(chain1_resis) == 0 or len(chain2_resis) == 0:
+                if len(comp.chain1_resis) == 0 or len(comp.chain2_resis) == 0:
                     print ' No atoms in distance <= 10 Angstremes for ' + chains[ch1].get_full_id()[2] + ' and ' + chains[ch2].get_full_id()[2] + ' chains' + '\n'
                 else:
                     
+                    comprasions.append(comp)
+
                     print 'Residues and atoms in distance <= 10 Angstremes for ' + chains[ch1].get_full_id()[2] + ' and ' + chains[ch2].get_full_id()[2] + ' chains' + '\n'
-                    print chain1_resis #close residues from 1st chain
+                    print comp.chain1_resis #close residues from 1st chain
                     print ""
-                    print chain1_close_atms #close atoms from 1st chain
+                    print comp.chain1_close_atms #close atoms from 1st chain
                     print "\n"
-                    print chain2_resis
+                    print comp.chain2_resis
                     print ''
-                    print chain2_close_atms
+                    print comp.chain2_close_atms
 
                     
-                    for r1 in chain1_resis:
+                    for r1 in comp.chain1_resis:
                         if r1 not in res_ids_onclose:
                             res_ids_onclose[r1] = 1
                         else:
                             res_ids_onclose[r1] += 1
                     #print ''
                     #print chain2_close
-                    for r2 in chain2_resis:
+                    for r2 in comp.chain2_resis:
                         if r2 not in res_ids_onclose:
                             res_ids_onclose[r2] = 1
                         else:
