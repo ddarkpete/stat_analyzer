@@ -1,3 +1,6 @@
+import os
+#import chimera
+
 from Bio.PDB import *
 from Bio.PDB.Atom import Atom 
 from Bio.PDB.Residue import Residue
@@ -7,8 +10,9 @@ from Bio.PDB.Structure import Structure
 from Bio.PDB.PDBIO import PDBIO
 from collections import OrderedDict
 
-#import chimera
-import os
+class Comprassion:
+    def __init__(self):
+
 
 path = ""
 
@@ -64,6 +68,7 @@ for pdb_file in files:#os.listdir(path):
                 if len(chain1_resis) == 0 or len(chain2_resis) == 0:
                     print ' No atoms in distance <= 10 Angstremes for ' + chains[ch1].get_full_id()[2] + ' and ' + chains[ch2].get_full_id()[2] + ' chains' + '\n'
                 else:
+                    
                     print 'Residues and atoms in distance <= 10 Angstremes for ' + chains[ch1].get_full_id()[2] + ' and ' + chains[ch2].get_full_id()[2] + ' chains' + '\n'
                     print chain1_resis #close residues from 1st chain
                     print ""
