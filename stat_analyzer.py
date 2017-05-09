@@ -49,12 +49,15 @@ for pdb_file in files:#os.listdir(path):
                     for atm2 in chain2_atms:
                         if atm1 - atm2 <= 10.0:
                             #print atm1.get_name() + ' ' + atm2.get_name()
-                            if atm1.get_parent() not in chain1_resis:
-                                chain1_resis.append(atm1.get_parent())
-                            if atm2.get_parent() not in chain2_resis:
-                                chain2_resis.append(atm2.get_parent())
+                            if atm1.get_parent().get_resname() not in chain1_resis:
+                                chain1_resis.append(atm1.get_parent().get_resname())
+                            
+                            if atm2.get_parent().get_resname() not in chain2_resis:
+                                chain2_resis.append(atm2.get_parent().get_resname())
+                            
                             if atm1.get_name() not in chain1_close_atms:
                                 chain1_close_atms.append(atm1.get_name())
+                            
                             if atm2.get_name() not in chain2_close_atms:
                                 chain2_close_atms.append(atm2.get_name()) 
                 
@@ -63,27 +66,26 @@ for pdb_file in files:#os.listdir(path):
                 else:
                     print 'Residues and atoms in distance <= 10 Angstremes for ' + chains[ch1].get_full_id()[2] + ' and ' + chains[ch2].get_full_id()[2] + ' chains' + '\n'
                     print chain1_resis #close residues from 1st chain
+                    print ""
                     print chain1_close_atms #close atoms from 1st chain
+                    print "\n"
                     print chain2_resis
+                    print ''
                     print chain2_close_atms
 
                     
                     for r1 in chain1_resis:
-                        if r1 not in resis_on_close:
-                           resis_on_close.append(r1)
-                        if r1.get_full_id()[3][0] not in res_ids_onclose:
-                            res_ids_onclose[r1.get_full_id()[3][0]] = 1
+                        if r1 not in res_ids_onclose:
+                            res_ids_onclose[r1] = 1
                         else:
-                            res_ids_onclose[r1.get_full_id()[3][0]] += 1
+                            res_ids_onclose[r1] += 1
                     #print ''
                     #print chain2_close
                     for r2 in chain2_resis:
-                        if r2 not in resis_on_close:
-                            resis_on_close.append(r2)
-                        if r2.get_full_id()[3][0] not in res_ids_onclose:
-                            res_ids_onclose[r2.get_full_id()[3][0]] = 1
+                        if r2 not in res_ids_onclose:
+                            res_ids_onclose[r2] = 1
                         else:
-                            res_ids_onclose[r2.get_full_id()[3][0]] += 1
+                            res_ids_onclose[r2] += 1
                     #print ''
                     break
             
