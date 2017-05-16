@@ -28,7 +28,7 @@ def convert_to_percentage(occ_list, _all):
         list(data)
         #print data
         data[1] = percentage(data[1], _all)
-        save_file.write("%s\n" % data)
+        save_file.write(data[0][0] + '\t' + data[0][1] +  '\t' + str(data[1]) + '\n')
     
 
 
