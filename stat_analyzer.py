@@ -19,6 +19,19 @@ class Comprassion:
         self.chain1_close_atms = []
         self.chain2_close_atms = []
 
+def percentage(x , _all):
+    return (float(x) / float(_all)) * 100
+
+def convert_to_percentage(occ_list, _all):
+    save_file = open('stats.txt', 'w')
+    for data in occ_list:
+        list(data)
+        #print data
+        data[1] = percentage(data[1], _all)
+        save_file.write("%s\n" % data)
+    
+
+
 
 path = ""
 
@@ -29,6 +42,7 @@ comprasions = []
 res_ids_onclose = {}
 pairs_occurence = {}
 analyzed_count = 0
+pair_counter = 0
 
 
 
@@ -87,10 +101,13 @@ for pdb_file in files:#os.listdir(path):
 
                                     if pair1 in pairs_occurence:
                                         pairs_occurence[pair1] += 1
+                                        pair_counter += 1
                                     elif pair2 in pairs_occurence:
                                         pairs_occurence[pair2] += 1
+                                        pair_counter += 1
                                     else:
                                         pairs_occurence[pair1] = 1
+                                        pair_counter += 1
                 
                 if len(comp.chain1_resis) == 0 or len(comp.chain2_resis) == 0:
                     print ' No atoms in distance <= 10 Angstremes for ' + chains[ch1].get_full_id()[2] + ' and ' + chains[ch2].get_full_id()[2] + ' chains' + '\n'
@@ -132,5 +149,8 @@ pairs_occurence = sorted(pairs_occurence.items(), key=lambda kv: kv[1], reverse=
 #print sorted_by_count # slownik reszt wraz z liczba ich wystepowan 
 print'\n\n\n\n'
 #print pairs_occurence
+pairs_occurence = [list(elem) for elem in pairs_occurence]
 for data in pairs_occurence:
-    print str(data[0]) + ' occures ' + str(data[1]) + ' times'
+    print str(data[0][0]) + ' - ' + str(data[0][1]) + ' occures ' + str(data[1]) + ' times.' + 'It is ' + str(percentage(data[1],pair_counter)) + ' % of all pairs'
+#print pairs_occurence_inlist
+convert_to_percentage(pairs_occurence,pair_counter)
