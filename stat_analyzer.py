@@ -10,6 +10,8 @@ from Bio.PDB.Structure import Structure
 from Bio.PDB.PDBIO import PDBIO
 from collections import OrderedDict
 
+
+
 class Comprassion:
     def __init__(self):
         self.chain1_resis = []
@@ -25,6 +27,7 @@ files = [f for f in os.listdir('.') if os.path.isfile(f) and '.pdb' in f]
 resis_on_close = []
 comprasions = []
 res_ids_onclose = {}
+pairs_occurence = {}
 analyzed_count = 0
 
 
@@ -60,20 +63,34 @@ for pdb_file in files:#os.listdir(path):
                 '''
 
                 for atm1 in chain1_atms:
-                    for atm2 in chain2_atms:
-                        if atm1 - atm2 <= 10.0:
-                            #print atm1.get_name() + ' ' + atm2.get_name()
-                            if atm1.get_parent().get_resname() not in comp.chain1_resis:
-                                comp.chain1_resis.append(atm1.get_parent().get_resname())
-                            
-                            if atm2.get_parent().get_resname() not in comp.chain2_resis:
-                                comp.chain2_resis.append(atm2.get_parent().get_resname())
-                            
-                            if atm1.get_name() not in comp.chain1_close_atms:
-                                comp.chain1_close_atms.append(atm1.get_name())
-                            
-                            if atm2.get_name() not in comp.chain2_close_atms:
-                                comp.chain2_close_atms.append(atm2.get_name()) 
+                    if atm1.get_name() == 'CB':
+                        #print 'CB atom 1'
+                        for atm2 in chain2_atms:
+                            if atm2.get_name() == 'CB':
+                                #print 'cb atom 2'
+                                if atm1 - atm2 <= 10.0:
+                                    #print atm1.get_name() + ' ' + atm2.get_name()
+                                    if atm1.get_parent().get_resname() not in comp.chain1_resis:
+                                        comp.chain1_resis.append(atm1.get_parent().get_resname())
+                                    
+                                    if atm2.get_parent().get_resname() not in comp.chain2_resis:
+                                        comp.chain2_resis.append(atm2.get_parent().get_resname())
+                                    
+                                    if atm1.get_name() not in comp.chain1_close_atms:
+                                        comp.chain1_close_atms.append(atm1.get_name())
+                                    
+                                    if atm2.get_name() not in comp.chain2_close_atms:
+                                        comp.chain2_close_atms.append(atm2.get_name())
+                                    
+                                    pair1 = (atm1.get_parent().get_resname() , atm2.get_parent().get_resname()) 
+                                    pair2 = (atm2.get_parent().get_resname() , atm1.get_parent().get_resname())
+
+                                    if pair1 in pairs_occurence:
+                                        pairs_occurence[pair1] += 1
+                                    elif pair2 in pairs_occurence:
+                                        pairs_occurence[pair2] += 1
+                                    else:
+                                        pairs_occurence[pair1] = 1
                 
                 if len(comp.chain1_resis) == 0 or len(comp.chain2_resis) == 0:
                     print ' No atoms in distance <= 10 Angstremes for ' + chains[ch1].get_full_id()[2] + ' and ' + chains[ch2].get_full_id()[2] + ' chains' + '\n'
@@ -105,9 +122,15 @@ for pdb_file in files:#os.listdir(path):
                             res_ids_onclose[r2] += 1
                     #print ''
                     break
-            
+  
+print'\n\n\n\n'          
 
-sorted_by_count = OrderedDict(sorted(res_ids_onclose.items(), key=lambda x: x[1]))
+#sorted_by_count = OrderedDict(sorted(res_ids_onclose.items(), key=lambda x: x[1]))
 #sorted_by_count = reverse(sorted_by_count)
+pairs_occurence = sorted(pairs_occurence.items(), key=lambda kv: kv[1], reverse=True)
 
-print sorted_by_count # slownik reszt wraz z liczba ich wystepowan 
+#print sorted_by_count # slownik reszt wraz z liczba ich wystepowan 
+print'\n\n\n\n'
+#print pairs_occurence
+for data in pairs_occurence:
+    print str(data[0]) + ' occures ' + str(data[1]) + ' times'
