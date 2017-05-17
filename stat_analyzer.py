@@ -1,4 +1,5 @@
 import os
+from os.path import join
 #import chimera
 
 from Bio.PDB import *
@@ -31,12 +32,12 @@ def convert_to_percentage(occ_list, _all):
         save_file.write(data[0][0] + '\t' + data[0][1] +  '\t' + str(data[1]) + '\n')
     
 
-
-
-path = ""
+path = "./pdbs/"
 
 #parser = PDBParser()
-files = [f for f in os.listdir('.') if os.path.isfile(f) and '.pdb' in f]
+print os.listdir(path)
+files = [f for f in os.listdir(path) if os.path.isfile(join(path,f)) and '.pdb' in f]
+print files
 resis_on_close = []
 comprasions = []
 res_ids_onclose = {}
@@ -50,7 +51,7 @@ for pdb_file in files:#os.listdir(path):
     
     print pdb_file + '\n'
     parser = PDBParser()
-    struct = parser.get_structure('structure', pdb_file)
+    struct = parser.get_structure('structure', path + pdb_file)
     chains = list(struct.get_chains())
     compares = []#storing compares that are already done
     analyzed_count += 1
@@ -69,12 +70,7 @@ for pdb_file in files:#os.listdir(path):
 
                 comp = Comprassion()
                 
-                '''
-                chain1_resis = []#lists of residues involved in contact between two chains in chain_1
-                chain2_resis = []#same as above
-                chain1_close_atms = []
-                chain2_close_atms = []
-                '''
+                
 
                 for atm1 in chain1_atms:
                     if atm1.get_name() == 'CB':

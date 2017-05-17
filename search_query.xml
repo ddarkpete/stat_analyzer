@@ -1,0 +1,13 @@
+<orgPdbQuery>
+
+<queryType>org.pdb.query.simple.NumberOfEntitiesQuery</queryType>
+
+<description>Number of Entities Search : Entity Type=Protein Min Number of Entities=5 Max Number of Entities=6</description>
+
+<entity.type.>p</entity.type.>
+
+<struct_asym.numEntities.min>5</struct_asym.numEntities.min>
+
+<struct_asym.numEntities.max>6</struct_asym.numEntities.max>
+
+</orgPdbQuery>
