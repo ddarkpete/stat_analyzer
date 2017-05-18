@@ -10,12 +10,13 @@ from collections import OrderedDict
 import os
 from os.path import join
 
-#from stat_analyzer import percentage
-
 path = "./models_to_score/"
 
 model_stats = {}
 
+
+def percentage(x , _all):
+    return (float(x) / float(_all)) * 100
 
 
 def stat_reader():
@@ -85,6 +86,16 @@ for pdb_file in files:#os.listdir(path):
                                     else:
                                         model_stats[pair1] = 1
                                         pair_counter += 1
+    for pair in model_stats:
+    	model_stats[pair] = percentage(model_stats[pair] , pair_counter)
+    	if model_stats[pair] in stats:
+    		model_stats[pair] = model_stats[pair] - stats[pair]
+    for pair in stats:
+    	if pair not in model_stats:
+    		model_stats[pair] = 0 - stats[pair]
+
+    	
+
     all_models_stats.append(model_stats)
 
 #TODO
@@ -93,7 +104,8 @@ for pdb_file in files:#os.listdir(path):
 # - 
 
 for am in all_models_stats:
-    print am
+    for ms , ms_val in am.iteritems():
+    	print str(ms) +  ' ' + str(ms_val)
     print ""
 
 
