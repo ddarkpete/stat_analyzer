@@ -32,6 +32,11 @@ def convert_to_percentage(occ_list, _all):
         save_file.write(data[0][0] + '\t' + data[0][1] +  '\t' + str(data[1]) + '\n')
     
 
+standard_aa_names = ['ALA', 'CYS', 'ASP', 'GLU', 'PHE', 'GLY', 'HIS', 'ILE', 'LYS',
+                     'LEU', 'MET', 'ASN', 'PRO', 'GLN', 'ARG', 'SER', 'THR', 'VAL',
+                     'TRP', 'TYR']
+
+
 path = "./pdbs/"
 
 #parser = PDBParser()
@@ -73,10 +78,10 @@ for pdb_file in files:#os.listdir(path):
                 
 
                 for atm1 in chain1_atms:
-                    if atm1.get_name() == 'CB':
+                    if atm1.get_name() == 'CB' and atm1.get_parent().get_resname() in standard_aa_names:
                         #print 'CB atom 1'
                         for atm2 in chain2_atms:
-                            if atm2.get_name() == 'CB':
+                            if atm2.get_name() == 'CB' and atm2.get_parent().get_resname() in standard_aa_names:
                                 #print 'cb atom 2'
                                 if atm1 - atm2 <= 10.0:
                                     #print atm1.get_name() + ' ' + atm2.get_name()
@@ -144,7 +149,8 @@ pairs_occurence = sorted(pairs_occurence.items(), key=lambda kv: kv[1], reverse=
 
 #print sorted_by_count # slownik reszt wraz z liczba ich wystepowan 
 print'\n\n\n\n'
-#print pairs_occurence
+print str(pair_counter)
+print'\n\n\n\n'
 pairs_occurence = [list(elem) for elem in pairs_occurence]
 for data in pairs_occurence:
     print str(data[0][0]) + ' - ' + str(data[0][1]) + ' occures ' + str(data[1]) + ' times.' + 'It is ' + str(percentage(data[1],pair_counter)) + ' % of all pairs'

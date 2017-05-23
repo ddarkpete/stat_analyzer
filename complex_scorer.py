@@ -10,11 +10,6 @@ from collections import OrderedDict
 import os
 from os.path import join
 
-path = "./models_to_score/"
-
-model_stats = {}
-
-
 def percentage(x , _all):
     return (float(x) / float(_all)) * 100
 
@@ -29,6 +24,15 @@ def stat_reader():
             temp_tulp = (splited[0] , splited[1])
             stats[temp_tulp] = float(splited[2])
     return stats
+
+
+path = "./models_to_score/"
+
+#model_stats = {}
+
+standard_aa_names = ["ALA", "CYS", "ASP", "GLU", "PHE", "GLY", "HIS", "ILE", "LYS",
+                     "LEU", "MET", "ASN", "PRO", "GLN", "ARG", "SER", "THR", "VAL",
+                     "TRP", "TYR"]
 
 stats = stat_reader()
 pair_counter = 0
@@ -60,10 +64,10 @@ for pdb_file in files:#os.listdir(path):
                 chain2_atms = list(chains[ch2].get_atoms())
                 
                 for atm1 in chain1_atms:
-                    if atm1.get_name() == 'CB':
+                    if atm1.get_name() == 'CB' and atm1.get_parent().get_resname() in standard_aa_names:
                         #print 'CB atom 1'
                         for atm2 in chain2_atms:
-                            if atm2.get_name() == 'CB':
+                            if atm2.get_name() == 'CB' and atm2.get_parent().get_resname() in standard_aa_names:
                                 #print 'cb atom 2'
                                 if atm1 - atm2 <= 10.0:
                                     pair1 = (atm1.get_parent().get_resname() , atm2.get_parent().get_resname()) 
