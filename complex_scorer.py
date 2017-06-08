@@ -34,6 +34,8 @@ standard_aa_names = ["ALA", "CYS", "ASP", "GLU", "PHE", "GLY", "HIS", "ILE", "LY
                      "LEU", "MET", "ASN", "PRO", "GLN", "ARG", "SER", "THR", "VAL",
                      "TRP", "TYR"]
 
+print str(len(standard_aa_names)) + 'aminos'
+
 stats = stat_reader()
 pair_counter = 0
 

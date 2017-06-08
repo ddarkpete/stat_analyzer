@@ -36,6 +36,10 @@ standard_aa_names = ['ALA', 'CYS', 'ASP', 'GLU', 'PHE', 'GLY', 'HIS', 'ILE', 'LY
                      'LEU', 'MET', 'ASN', 'PRO', 'GLN', 'ARG', 'SER', 'THR', 'VAL',
                      'TRP', 'TYR']
 
+aa_observed = {'ALA' : 0 , 'CYS' : 0 , 'ASP' : 0 , 'GLU' : 0 , 'PHE' : 0 , 'GLY' : 0 , 'HIS' : 0 , 'ILE' : 0 , 'LYS' : 0 ,
+                     'LEU' : 0 , 'MET' : 0 , 'ASN' : 0 , 'PRO' : 0 , 'GLN' : 0 , 'ARG' : 0 , 'SER' : 0 , 'THR' : 0 , 'VAL' : 0 ,
+                     'TRP' : 0 , 'TYR' : 0 }
+
 
 path = "./pdbs/"
 
@@ -87,10 +91,10 @@ for pdb_file in files:#os.listdir(path):
                                     #print atm1.get_name() + ' ' + atm2.get_name()
                                     if atm1.get_parent().get_resname() not in comp.chain1_resis:
                                         comp.chain1_resis.append(atm1.get_parent().get_resname())
-                                    
+                                        aa_observed[atm1.get_parent().get_resname()]+=1
                                     if atm2.get_parent().get_resname() not in comp.chain2_resis:
                                         comp.chain2_resis.append(atm2.get_parent().get_resname())
-                                    
+                                        aa_observed[atm2.get_parent().get_resname()]+=1
                                     if atm1.get_name() not in comp.chain1_close_atms:
                                         comp.chain1_close_atms.append(atm1.get_name())
                                     
@@ -151,8 +155,17 @@ pairs_occurence = sorted(pairs_occurence.items(), key=lambda kv: kv[1], reverse=
 print'\n\n\n\n'
 print str(pair_counter)
 print'\n\n\n\n'
+sumka = 0
 pairs_occurence = [list(elem) for elem in pairs_occurence]
 for data in pairs_occurence:
     print str(data[0][0]) + ' - ' + str(data[0][1]) + ' occures ' + str(data[1]) + ' times.' + 'It is ' + str(percentage(data[1],pair_counter)) + ' % of all pairs'
+    sumka += data[1]
 #print pairs_occurence_inlist
+print str(sumka)
 convert_to_percentage(pairs_occurence,pair_counter)
+
+''' TODO
+
+-Do przekazania słownik do drugiego pliku z licznośćią aminokwasów
+-dalsza implementacja wzoru w sensie tego wyliczjacego expected
+-poten ten logarytmem
