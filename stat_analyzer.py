@@ -23,8 +23,10 @@ class Comprassion:
 def percentage(x , _all):
     return (float(x) / float(_all)) * 100
 
-def convert_to_percentage(occ_list, _all):
+def convert_to_percentage(occ_list,aminos, _all):
     save_file = open('stats.txt', 'w')
+    save_file2 = open('aa_observed.txt', 'w')
+    save_file2.write(aminos)
     for data in occ_list:
         list(data)
         #print data
