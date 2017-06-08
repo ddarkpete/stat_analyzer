@@ -1,3 +1,7 @@
+
+import warnings
+warnings.filterwarnings("ignore")
+
 import os
 from os.path import join
 #import chimera
@@ -23,16 +27,22 @@ class Comprassion:
 def percentage(x , _all):
     return (float(x) / float(_all)) * 100
 
-def convert_to_percentage(occ_list,aminos, _all):
+def convert_to_percentage(occ_list, amino_count, _all):
     save_file = open('stats.txt', 'w')
     save_file2 = open('aa_observed.txt', 'w')
-    save_file2.write(aminos)
+    save_file2.write(str( amino_count))
     for data in occ_list:
         list(data)
         #print data
-        data[1] = percentage(data[1], _all)
-        save_file.write(data[0][0] + '\t' + data[0][1] +  '\t' + str(data[1]) + '\n')
-    
+        data[1] = expected_count(data[0][0], data[0][1], data[1], _all, amino_count) #percentage(data[1], _all)
+        if data[1] < 1.0 :
+            continue
+        else:
+            save_file.write(data[0][0] + '\t' + data[0][1] +  '\t' + str(data[1]) + '\n')
+
+def expected_count(amino1, amino2, pair_count, all_count, amino_count):
+    print amino1 + ' count ' + str(amino_count[amino1]) + ' - ' + amino2 + ' count ' + str(amino_count[amino2]) + ' pair count ' + str(pair_count) + ' all ' + str(all_count)
+    return pair_count * float(amino_count[amino1]) / float(all_count) * float(amino_count[amino2]) / float(all_count)
 
 standard_aa_names = ['ALA', 'CYS', 'ASP', 'GLU', 'PHE', 'GLY', 'HIS', 'ILE', 'LYS',
                      'LEU', 'MET', 'ASN', 'PRO', 'GLN', 'ARG', 'SER', 'THR', 'VAL',
@@ -160,14 +170,14 @@ print'\n\n\n\n'
 sumka = 0
 pairs_occurence = [list(elem) for elem in pairs_occurence]
 for data in pairs_occurence:
-    print str(data[0][0]) + ' - ' + str(data[0][1]) + ' occures ' + str(data[1]) + ' times.' + 'It is ' + str(percentage(data[1],pair_counter)) + ' % of all pairs'
+    #print str(data[0][0]) + ' - ' + str(data[0][1]) + ' occures ' + str(data[1]) + ' times.' + 'It is ' + str(percentage(data[1],pair_counter)) + ' % of all pairs'
     sumka += data[1]
 #print pairs_occurence_inlist
 print str(sumka)
-convert_to_percentage(pairs_occurence,pair_counter)
+convert_to_percentage(pairs_occurence,aa_observed,sum(aa_observed.values()))
 
 ''' TODO
 
--Do przekazania słownik do drugiego pliku z licznośćią aminokwasów
+-Do przekazania slownik do drugiego pliku z licznoscia aminokwasow
 -dalsza implementacja wzoru w sensie tego wyliczjacego expected
--poten ten logarytmem
+-poten ten logarytmem '''

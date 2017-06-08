@@ -1,3 +1,6 @@
+import warnings
+warnings.filterwarnings("ignore")
+
 from Bio.PDB import *
 from Bio.PDB.Atom import Atom 
 from Bio.PDB.Residue import Residue
@@ -6,6 +9,7 @@ from Bio.PDB.Model import Model
 from Bio.PDB.Structure import Structure
 from Bio.PDB.PDBIO import PDBIO
 from collections import OrderedDict
+from math import log10
 
 import os
 from os.path import join
@@ -25,6 +29,13 @@ def stat_reader():
             stats[temp_tulp] = float(splited[2])
     return stats
 
+def aa_observed_reader():
+    file = "aa_observed.txt"
+    with open(file , 'r') as aas:
+        buff = aas.read()
+        observed_aas = eval(buff)
+    return observed_aas
+
 
 path = "./models_to_score/"
 
@@ -34,9 +45,14 @@ standard_aa_names = ["ALA", "CYS", "ASP", "GLU", "PHE", "GLY", "HIS", "ILE", "LY
                      "LEU", "MET", "ASN", "PRO", "GLN", "ARG", "SER", "THR", "VAL",
                      "TRP", "TYR"]
 
+
 print str(len(standard_aa_names)) + 'aminos'
 
 stats = stat_reader()
+print stats
+aa_observed = aa_observed_reader()
+print aa_observed
+print'************************************'
 pair_counter = 0
 
 all_models_stats = []
@@ -89,18 +105,28 @@ for pdb_file in files:#os.listdir(path):
                                         else:
                                             model_stats[pair2] = 1
                                             pair_counter += 1
+                                    '''
                                     else:
+                                        print 'cycki'
                                         model_stats[pair1] = 1
                                         pair_counter += 1
+                                    '''
+    blacklist = []
     for pair in model_stats:
-    	model_stats[pair] = percentage(model_stats[pair] , pair_counter)
-    	if model_stats[pair] in stats:
-    		model_stats[pair] = model_stats[pair] - stats[pair]
+        #model_stats[pair] = percentage(model_stats[pair] , pair_counter)
+        if pair in stats:#a co jak nie ?
+            model_stats[pair] = log10(float(model_stats[pair]) / float(stats[pair]))
+        else:
+            #print pair
+            blacklist.append(pair)
+    for b in blacklist:
+        del model_stats[b]
+    '''
     for pair in stats:
-    	if pair not in model_stats:
-    		model_stats[pair] = 0 - stats[pair]
-
-    	
+        if pair not in model_stats:
+            model_stats[pair] = 0 - stats[pair]#no i co w tym wypadku ?????
+    '''
+        
 
     all_models_stats.append(model_stats)
 
@@ -111,7 +137,7 @@ for pdb_file in files:#os.listdir(path):
 
 for am in all_models_stats:
     for ms , ms_val in am.iteritems():
-    	print str(ms) +  ' ' + str(ms_val)
+        print str(ms) +  ' ' + str(ms_val)
     print ""
 
 
