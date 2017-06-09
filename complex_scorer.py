@@ -1,6 +1,7 @@
+'''
 import warnings
 warnings.filterwarnings("ignore")
-
+'''
 from Bio.PDB import *
 from Bio.PDB.Atom import Atom 
 from Bio.PDB.Residue import Residue
@@ -14,9 +15,14 @@ from math import log10
 import os
 from os.path import join
 
+class Model:
+    def __init__(self):
+        self.name = ""
+        self.stats = {}
+        self.score = 0
+
 def percentage(x , _all):
     return (float(x) / float(_all)) * 100
-
 
 def stat_reader():
     file = "stats.txt"
@@ -37,9 +43,9 @@ def aa_observed_reader():
     return observed_aas
 
 
-path = "./models_to_score/"
+path = "./models_to_score/test/test/"
 
-#model_stats = {}
+#model.stats = {}
 
 standard_aa_names = ["ALA", "CYS", "ASP", "GLU", "PHE", "GLY", "HIS", "ILE", "LYS",
                      "LEU", "MET", "ASN", "PRO", "GLN", "ARG", "SER", "THR", "VAL",
@@ -53,7 +59,7 @@ print stats
 aa_observed = aa_observed_reader()
 print aa_observed
 print'************************************'
-pair_counter = 0
+pair_counter = 0.0
 
 all_models_stats = []
 
@@ -65,9 +71,11 @@ for pdb_file in files:#os.listdir(path):
     parser = PDBParser()
     struct = parser.get_structure('structure', path + pdb_file)
     chains = list(struct.get_chains())
+    #print str(len(chains))
     compares = []#storing compares that are already done
     #analyzed_count += 1
-    model_stats = {}
+    model = Model()
+    model.name = pdb_file
     
     for ch1 in range(0,len(chains)):
         for ch2 in range(ch1 + 1,len(chains)):
@@ -80,6 +88,7 @@ for pdb_file in files:#os.listdir(path):
 
                 chain1_atms = list(chains[ch1].get_atoms())
                 chain2_atms = list(chains[ch2].get_atoms())
+                #print str(len(chain1_atms)) + ' ' + str(len(chain2_atms))
                 
                 for atm1 in chain1_atms:
                     if atm1.get_name() == 'CB' and atm1.get_parent().get_resname() in standard_aa_names:
@@ -87,48 +96,46 @@ for pdb_file in files:#os.listdir(path):
                         for atm2 in chain2_atms:
                             if atm2.get_name() == 'CB' and atm2.get_parent().get_resname() in standard_aa_names:
                                 #print 'cb atom 2'
-                                if atm1 - atm2 <= 10.0:
+                                if atm1 - atm2 <= 20.0:
+                                    #print 'in 10 angs'
                                     pair1 = (atm1.get_parent().get_resname() , atm2.get_parent().get_resname()) 
                                     pair2 = (atm2.get_parent().get_resname() , atm1.get_parent().get_resname())
 
                                     if pair1 in stats:
-                                        if pair1 in model_stats:
-                                            model_stats[pair1] += 1
+                                        if pair1 in model.stats:
+                                            model.stats[pair1] += 1
                                             pair_counter += 1
                                         else:
-                                            model_stats[pair1] = 1
+                                            model.stats[pair1] = 1
                                             pair_counter += 1
                                     elif pair2 in stats:
-                                        if pair2 in model_stats:
-                                            model_stats[pair2] += 1
+                                        if pair2 in model.stats:
+                                            model.stats[pair2] += 1
                                             pair_counter += 1
                                         else:
-                                            model_stats[pair2] = 1
+                                            model.stats[pair2] = 1
                                             pair_counter += 1
-                                    '''
-                                    else:
-                                        print 'cycki'
-                                        model_stats[pair1] = 1
-                                        pair_counter += 1
-                                    '''
     blacklist = []
-    for pair in model_stats:
-        #model_stats[pair] = percentage(model_stats[pair] , pair_counter)
+    for pair in model.stats:
+        #model.stats[pair] = percentage(model.stats[pair] , pair_counter)
         if pair in stats:#a co jak nie ?
-            model_stats[pair] = log10(float(model_stats[pair]) / float(stats[pair]))
+            model.stats[pair] = log10(float(model.stats[pair]) / float(stats[pair]))
         else:
             #print pair
             blacklist.append(pair)
+    
     for b in blacklist:
-        del model_stats[b]
+        del model.stats[b]
+
+    model.score = sum(model.stats.values())
     '''
     for pair in stats:
-        if pair not in model_stats:
-            model_stats[pair] = 0 - stats[pair]#no i co w tym wypadku ?????
+        if pair not in model.stats:
+            model.stats[pair] = 0 - stats[pair]#no i co w tym wypadku ?????
     '''
         
 
-    all_models_stats.append(model_stats)
+    all_models_stats.append(model)
 
 #TODO
 # - Struktura dla par - licznosc modeli 
@@ -136,9 +143,12 @@ for pdb_file in files:#os.listdir(path):
 # - 
 
 for am in all_models_stats:
-    for ms , ms_val in am.iteritems():
+    print "\n" + am.name + "\n"
+    for ms , ms_val in am.stats.iteritems():
         print str(ms) +  ' ' + str(ms_val)
-    print ""
+    print "\n model score : " + str(am.score) + '\n' 
+
+print str(len(all_models_stats))
 
 
 
