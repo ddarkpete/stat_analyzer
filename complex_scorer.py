@@ -43,7 +43,7 @@ def aa_observed_reader():
     return observed_aas
 
 
-path = "./models_to_score/test/test/"
+path = "./models_to_score/goodmodels/"
 
 #model.stats = {}
 
@@ -52,18 +52,20 @@ standard_aa_names = ["ALA", "CYS", "ASP", "GLU", "PHE", "GLY", "HIS", "ILE", "LY
                      "TRP", "TYR"]
 
 
-print str(len(standard_aa_names)) + 'aminos'
+#print str(len(standard_aa_names)) + 'aminos'
 
 stats = stat_reader()
-print stats
+#print stats
 aa_observed = aa_observed_reader()
-print aa_observed
-print'************************************'
+#print aa_observed
+#print'************************************'
 pair_counter = 0.0
 
 all_models_stats = []
 
 files = [f for f in os.listdir(path) if os.path.isfile(join(path,f)) and '.pdb' in f]
+
+files.sort()
 
 for pdb_file in files:#os.listdir(path):
     
@@ -96,7 +98,7 @@ for pdb_file in files:#os.listdir(path):
                         for atm2 in chain2_atms:
                             if atm2.get_name() == 'CB' and atm2.get_parent().get_resname() in standard_aa_names:
                                 #print 'cb atom 2'
-                                if atm1 - atm2 <= 20.0:
+                                if atm1 - atm2 <= 10.0:
                                     #print 'in 10 angs'
                                     pair1 = (atm1.get_parent().get_resname() , atm2.get_parent().get_resname()) 
                                     pair2 = (atm2.get_parent().get_resname() , atm1.get_parent().get_resname())
