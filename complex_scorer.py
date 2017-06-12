@@ -98,7 +98,7 @@ for pdb_file in files:#os.listdir(path):
                         for atm2 in chain2_atms:
                             if atm2.get_name() == 'CB' and atm2.get_parent().get_resname() in standard_aa_names:
                                 #print 'cb atom 2'
-                                if atm1 - atm2 <= 10.0:
+                                if atm1 - atm2 <= 15.0:
                                     #print 'in 10 angs'
                                     pair1 = (atm1.get_parent().get_resname() , atm2.get_parent().get_resname()) 
                                     pair2 = (atm2.get_parent().get_resname() , atm1.get_parent().get_resname())

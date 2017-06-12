@@ -73,7 +73,7 @@ for pdb_file in files:#os.listdir(path):
     print pdb_file + '\n'
     parser = PDBParser()
     struct = parser.get_structure('structure', path + pdb_file)
-    chains = list(struct.get_chains())
+    chains = list(struct[0].get_chains())
     compares = []#storing compares that are already done
     analyzed_count += 1
     
@@ -99,7 +99,7 @@ for pdb_file in files:#os.listdir(path):
                         for atm2 in chain2_atms:
                             if atm2.get_name() == 'CB' and atm2.get_parent().get_resname() in standard_aa_names:
                                 #print 'cb atom 2'
-                                if atm1 - atm2 <= 10.0:
+                                if atm1 - atm2 <= 15.0:
                                     #print atm1.get_name() + ' ' + atm2.get_name()
                                     if atm1.get_parent().get_resname() not in comp.chain1_resis:
                                         comp.chain1_resis.append(atm1.get_parent().get_resname())
