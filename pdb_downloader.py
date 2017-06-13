@@ -1,4 +1,6 @@
 import urllib2
+from os import path
+
 
 
 url = 'http://www.rcsb.org/pdb/rest/search'
@@ -21,8 +23,6 @@ if result:
 
     print  result
     ids = result.split('\n')
-    #ids.pop()
-    #print ids 
     del ids[-1]
     print len(ids)
     for i in ids:
@@ -30,8 +30,11 @@ if result:
         try:
             pdb_file = urllib2.urlopen(pdb_url)
             save_file = 'pdbs/' + i + '.pdb'
-            with open(save_file , 'w') as output:
-                output.write(pdb_file.read())
+            if path.exists(save_file):
+                continue
+            else:
+                with open(save_file , 'w') as output:
+                    output.write(pdb_file.read())
         except urllib2.HTTPError, e:
             if e.code == 404:
                 print "No PDB file for id: " + i

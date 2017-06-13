@@ -1,13 +1,29 @@
-<orgPdbQuery>
 
-<queryType>org.pdb.query.simple.NumberOfEntitiesQuery</queryType>
-
-<description>Number of Entities Search : Entity Type=Protein Min Number of Entities=5 Max Number of Entities=6</description>
-
-<entity.type.>p</entity.type.>
-
-<struct_asym.numEntities.min>5</struct_asym.numEntities.min>
-
-<struct_asym.numEntities.max>6</struct_asym.numEntities.max>
-
-</orgPdbQuery>
+<orgPdbCompositeQuery version="1.0">
+  <queryRefinement>
+  <queryRefinementLevel>0</queryRefinementLevel>
+  <orgPdbQuery>
+    <version>head</version>
+    <queryType>org.pdb.query.simple.NumberOfChainsQuery</queryType>
+    <struct_asym.numChains.min>2</struct_asym.numChains.min>
+    <struct_asym.numChains.max>30</struct_asym.numChains.max>
+  </orgPdbQuery>
+ </queryRefinement>
+ <queryRefinement>
+  <queryRefinementLevel>1</queryRefinementLevel>
+  <conjunctionType>and</conjunctionType>
+  <orgPdbQuery>
+    <queryType>org.pdb.query.simple.ResolutionQuery</queryType>
+    <refine.ls_d_res_high.comparator>between</refine.ls_d_res_high.comparator>
+    <refine.ls_d_res_high.max>2.0</refine.ls_d_res_high.max>
+  </orgPdbQuery>
+ </queryRefinement>
+ <queryRefinement>
+  <queryRefinementLevel>2</queryRefinementLevel>
+  <conjunctionType>and</conjunctionType>
+  <orgPdbQuery>
+    <queryType>org.pdb.query.simple.HomologueReductionQuery</queryType>
+     <identityCutoff>90</identityCutoff>
+  </orgPdbQuery>
+ </queryRefinement>
+</orgPdbCompositeQuery>
