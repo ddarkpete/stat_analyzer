@@ -1,0 +1,126 @@
+Scoring function will penalyze shape filling twice since you defined two parameters: DENSITY and MAP_FREESPACE!
+ANNTEMP.................... 1.0
+CHI2_PENALTY.................... [0.0, 0.0]
+CLASHES_PENALTY.................... [1.0, 1.0]
+COMPONENTS_INDEXES.................... {}
+CRYSOL_PATH.................... 
+CURVE.................... None
+DENSITY_PENALTY.................... [1.0, 1.0]
+DISABLED_MUTATIONS.................... ['translation', 'exchange', 'SimulateDisorder']
+EXCHANGE_FREQ.................... 0.0
+EXCHANGEANDSAMPLE_FREQ.................... 0.0
+FREESPACE_PENALTY.................... [1.0, 1.0]
+IDENTIFY_DISORDERS.................... False
+IS_CHI2_DEFINED.................... False
+IS_DENSITY_DEFINED.................... True
+IS_FREESPACE_DEFINED.................... True
+IS_RG_PENALTY_DEFINED.................... False
+ITER_NR.................... 0
+KVOL.................... None
+KVOL_GIVEN.................... False
+LINKED_COMPONENTS.................... {}
+MAX_ROT_ANGLE.................... 5.0
+MAX_TRANS_VEC.................... [5.0, 5.0, 5.0]
+MAXPOOLSIZE.................... 100
+MOVABLE.................... []
+MOVEHISTORY.................... 
+MUTATION_FREQUENCIES.................... {'SimulateDisorder': 0.0, 'translation_all': 0.25, 'rotation_all': 0.25, 'exchange': 0.0, 'rotation': 0.25, 'translation': 0.0, 'rotation_cov': 0.25}
+NITER.................... 100
+OUT_STEPS.................... []
+OUTBOX_PENALTY.................... [1.0, 1.0]
+PARAM_SCALING.................... on
+PARAM_SCALING_RANGE1.................... [0.5, 1.0]
+PARAM_SCALING_RANGE2.................... [0.25, 0.5]
+PARAM_SCALING_RANGE3.................... [0.0, 0.25]
+PARAM_SCALING_RANGES.................... [0.0, 0.25, 0.5]
+REDUCTMETHOD.................... Roulette
+REHEAT.................... False
+REHEAT_REJECTIONS.................... 1.0
+REPL_EXCH_FREQ.................... False
+REPLICA_EXCHANGE_FREQ.................... 1000
+REPLICA_TEMPS.................... [400, 350, 300, 250, 200, 150, 100, 50, 25, 0]
+REPRESENTATION.................... ca
+REQUIRED_CLASHES_PENALTY.................... True
+REQUIRED_CLASHES_PENALTY_ALLATOMS.................... False
+RESTRAINTS_PENALTY.................... [1.0, 1.0]
+RG_PENALTY.................... [0.0, 0.0]
+RG_VAL.................... 0.0
+ROTATION_ALL_FREQ.................... 0.25
+ROTATION_COV_FREQ.................... 0.25
+ROTATION_FREQ.................... 0.25
+ROTATION_WHOLE_FREQ.................... 0.0
+SAVE_RES_MODE.................... niter
+SAXSRADIUS.................... 0.0
+SCALING_RANGES.................... [[50, 100], [25, 50], [0, 25], [0.5, 1.0], [0.25, 0.5], [0.0, 0.25]]
+SHAPEDESC.................... True
+SIMBOX.................... 1.4
+SIMBOXRADIUS.................... 1.0
+SIMGRIDTYPE.................... cubic
+SIMMETHOD.................... simulatedannealing
+SIMUL_DD_FREQ.................... 0.0
+SIMUL_STEPS.................... 10000
+START_ORIENT.................... False
+STRUCT_NR.................... 1
+SYMMETRY_PENALTY.................... [0.0, 0.0]
+THRESHOLD.................... 0.0
+THRESHOLD_GIVEN.................... True
+TRANSLATION_ALL_FREQ.................... 0.25
+TRANSLATION_FREQ.................... 0.0
+WRITE_EACHBETTER.................... False
+cx score for iteration 0 -89.8891 components: restraints: -0 collisions: -5.42169 map filling: 1.66105e-30 outbox atoms: 0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 99 -82.101 components: restraints: -0 collisions: -2.20884 map filling: -79.8922 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 151 -79.606 components: restraints: -0 collisions: -0 map filling: -79.606 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 261 -79.7392 components: restraints: -0 collisions: -0.200803 map filling: -79.5384 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 384 -79.9894 components: restraints: -0 collisions: -0 map filling: -79.9894 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 410 -79.8978 components: restraints: -0 collisions: -0 map filling: -79.8978 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 577 -79.5581 components: restraints: -0 collisions: -0 map filling: -79.5581 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 674 -79.5877 components: restraints: -0 collisions: -0 map filling: -79.5877 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 752 -79.4566 components: restraints: -0 collisions: -0 map filling: -79.4566 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 806 -79.4665 components: restraints: -0 collisions: -0 map filling: -79.4665 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 922 -79.4651 components: restraints: -0 collisions: -0 map filling: -79.4651 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 1058 -79.5032 components: restraints: -0 collisions: -0 map filling: -79.5032 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 1212 -79.5243 components: restraints: -0 collisions: -0 map filling: -79.5243 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 1333 -79.5187 components: restraints: -0 collisions: -0 map filling: -79.5187 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 1482 -79.4637 components: restraints: -0 collisions: -0 map filling: -79.4637 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 1555 -79.4736 components: restraints: -0 collisions: -0 map filling: -79.4736 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 1624 -79.4989 components: restraints: -0 collisions: -0 map filling: -79.4989 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 1780 -79.5412 components: restraints: -0 collisions: -0 map filling: -79.5412 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 1832 -79.4933 components: restraints: -0 collisions: -0 map filling: -79.4933 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 1904 -79.4961 components: restraints: -0 collisions: -0 map filling: -79.4961 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 2132 -79.544 components: restraints: -0 collisions: -0 map filling: -79.544 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 2294 -79.5779 components: restraints: -0 collisions: -0 map filling: -79.5779 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 2371 -79.537 components: restraints: -0 collisions: -0 map filling: -79.537 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 2415 -79.4919 components: restraints: -0 collisions: -0 map filling: -79.4919 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 2498 -79.5144 components: restraints: -0 collisions: -0 map filling: -79.5144 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 2657 -79.5497 components: restraints: -0 collisions: -0 map filling: -79.5497 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 2791 -79.4693 components: restraints: -0 collisions: -0 map filling: -79.4693 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 2897 -79.4764 components: restraints: -0 collisions: -0 map filling: -79.4764 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 3045 -79.575 components: restraints: -0 collisions: -0 map filling: -79.575 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 3134 -79.6187 components: restraints: -0 collisions: -0 map filling: -79.6187 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 3241 -79.5821 components: restraints: -0 collisions: -0 map filling: -79.5821 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 3342 -79.5708 components: restraints: -0 collisions: -0 map filling: -79.5708 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 3446 -79.5356 components: restraints: -0 collisions: -0 map filling: -79.5356 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 3826 -79.5454 components: restraints: -0 collisions: -0 map filling: -79.5454 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 4010 -79.4834 components: restraints: -0 collisions: -0 map filling: -79.4834 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 4105 -79.4862 components: restraints: -0 collisions: -0 map filling: -79.4862 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 4287 -79.5102 components: restraints: -0 collisions: -0 map filling: -79.5102 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 4399 -79.5003 components: restraints: -0 collisions: -0 map filling: -79.5003 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 4576 -79.4975 components: restraints: -0 collisions: -0 map filling: -79.4975 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 4657 -79.4538 components: restraints: -0 collisions: -0 map filling: -79.4538 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 4785 -79.475 components: restraints: -0 collisions: -0 map filling: -79.475 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 4817 -79.4679 components: restraints: -0 collisions: -0 map filling: -79.4679 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 4921 -79.4552 components: restraints: -0 collisions: -0 map filling: -79.4552 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 5082 -79.4383 components: restraints: -0 collisions: -0 map filling: -79.4383 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 5196 -79.3777 components: restraints: -0 collisions: -0 map filling: -79.3777 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 5206 -79.3763 components: restraints: -0 collisions: -0 map filling: -79.3763 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 5355 -79.3636 components: restraints: -0 collisions: -0 map filling: -79.3636 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 5430 -79.365 components: restraints: -0 collisions: -0 map filling: -79.365 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 5546 -79.3664 components: restraints: -0 collisions: -0 map filling: -79.3664 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 5899 -79.3622 components: restraints: -0 collisions: -0 map filling: -79.3622 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 5935 -79.3566 components: restraints: -0 collisions: -0 map filling: -79.3566 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 6169 -79.3509 components: restraints: -0 collisions: -0 map filling: -79.3509 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 6379 -79.3481 components: restraints: -0 collisions: -0 map filling: -79.3481 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 6554 -79.3495 components: restraints: -0 collisions: -0 map filling: -79.3495 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 7660 -79.3467 components: restraints: -0 collisions: -0 map filling: -79.3467 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 7826 -79.3453 components: restraints: -0 collisions: -0 map filling: -79.3453 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+Rejected	-79.3452911377	iter_nr	10000

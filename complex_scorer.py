@@ -1,7 +1,6 @@
-'''
 import warnings
 warnings.filterwarnings("ignore")
-'''
+
 from Bio.PDB import *
 from Bio.PDB.Atom import Atom 
 from Bio.PDB.Residue import Residue
@@ -14,6 +13,8 @@ from math import log10
 
 import os
 from os.path import join
+
+import sys
 
 class Model:
     def __init__(self):
@@ -43,7 +44,7 @@ def aa_observed_reader():
     return observed_aas
 
 
-path = "./models_to_score/goodmodels/"
+path = "./models_to_score/7cat_pyry_out_20k/"
 
 #model.stats = {}
 
@@ -72,7 +73,7 @@ for pdb_file in files:#os.listdir(path):
     print pdb_file + '\n'
     parser = PDBParser()
     struct = parser.get_structure('structure', path + pdb_file)
-    chains = list(struct.get_chains())
+    chains = list(struct[0].get_chains())
     #print str(len(chains))
     compares = []#storing compares that are already done
     #analyzed_count += 1
@@ -94,11 +95,9 @@ for pdb_file in files:#os.listdir(path):
                 
                 for atm1 in chain1_atms:
                     if atm1.get_name() == 'CB' and atm1.get_parent().get_resname() in standard_aa_names:
-                        #print 'CB atom 1'
                         for atm2 in chain2_atms:
                             if atm2.get_name() == 'CB' and atm2.get_parent().get_resname() in standard_aa_names:
-                                #print 'cb atom 2'
-                                if atm1 - atm2 <= 15.0:
+                                if atm1 - atm2 <= 20.0:
                                     #print 'in 10 angs'
                                     pair1 = (atm1.get_parent().get_resname() , atm2.get_parent().get_resname()) 
                                     pair2 = (atm2.get_parent().get_resname() , atm1.get_parent().get_resname())
@@ -117,6 +116,8 @@ for pdb_file in files:#os.listdir(path):
                                         else:
                                             model.stats[pair2] = 1
                                             pair_counter += 1
+
+
     blacklist = []
     for pair in model.stats:
         #model.stats[pair] = percentage(model.stats[pair] , pair_counter)
@@ -138,6 +139,7 @@ for pdb_file in files:#os.listdir(path):
         
 
     all_models_stats.append(model)
+    #print '\n********************************************************dsada****************\n'
 
 #TODO
 # - Struktura dla par - licznosc modeli 

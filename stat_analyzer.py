@@ -35,13 +35,13 @@ def convert_to_percentage(occ_list, amino_count, _all):
         list(data)
         #print data
         data[1] = expected_count(data[0][0], data[0][1], data[1], _all, amino_count) #percentage(data[1], _all)
-        if data[1] < 1.0 :
+        if data[1] < 5.0 :
             continue
         else:
             save_file.write(data[0][0] + '\t' + data[0][1] +  '\t' + str(data[1]) + '\n')
 
 def expected_count(amino1, amino2, pair_count, all_count, amino_count):
-    print amino1 + ' count ' + str(amino_count[amino1]) + ' - ' + amino2 + ' count ' + str(amino_count[amino2]) + ' pair count ' + str(pair_count) + ' all ' + str(all_count)
+    #print amino1 + ' count ' + str(amino_count[amino1]) + ' - ' + amino2 + ' count ' + str(amino_count[amino2]) + ' pair count ' + str(pair_count) + ' all ' + str(all_count)
     return pair_count * float(amino_count[amino1]) / float(all_count) * float(amino_count[amino2]) / float(all_count)
 
 standard_aa_names = ['ALA', 'CYS', 'ASP', 'GLU', 'PHE', 'GLY', 'HIS', 'ILE', 'LYS',
@@ -55,7 +55,6 @@ aa_observed = {'ALA' : 0 , 'CYS' : 0 , 'ASP' : 0 , 'GLU' : 0 , 'PHE' : 0 , 'GLY'
 
 path = "./pdbs/"
 
-#parser = PDBParser()
 print os.listdir(path)
 files = [f for f in os.listdir(path) if os.path.isfile(join(path,f)) and '.pdb' in f]
 print files
@@ -68,7 +67,8 @@ pair_counter = 0
 
 
 
-for pdb_file in files:#os.listdir(path):
+
+for pdb_file in files: #iteracja po plikach pdb
     
     print pdb_file + '\n'
     parser = PDBParser()
@@ -76,12 +76,21 @@ for pdb_file in files:#os.listdir(path):
     chains = list(struct[0].get_chains())
     compares = []#storing compares that are already done
     analyzed_count += 1
+    struct_chains = []
     
     for ch1 in range(0,len(chains)):
+        
+        aas = list(chains[ch1].get_residues())
+        for a in aas:# uzyskanie licznoci poszczegolnych aminokwasow 
+            if a.get_resname() in standard_aa_names:
+                #print a.get_resname()
+                aa_observed[a.get_resname()] += 1
+
+        
         for ch2 in range(ch1 + 1,len(chains)):
             checklist = [ chains[ch1].get_full_id()[2] , chains[ch2].get_full_id()[2] ]
             checklist2 =  [ chains[ch2].get_full_id()[2], chains[ch1].get_full_id()[2] ]
-            if chains[ch1].get_full_id()[2] != chains[ch2].get_full_id()[2] and not checklist in compares and not checklist2 in compares:
+            if chains[ch1].get_full_id()[2] != chains[ch2].get_full_id()[2] and not checklist in compares and not checklist2 in compares:#sprawdzenie czy nie porownujemy lancucha z samym
 
                 comparsion = [ chains[ch1].get_full_id()[2] , chains[ch2].get_full_id()[2] ]
                 compares.append(comparsion)#appending comprasion to already done comprasions
@@ -103,10 +112,10 @@ for pdb_file in files:#os.listdir(path):
                                     #print atm1.get_name() + ' ' + atm2.get_name()
                                     if atm1.get_parent().get_resname() not in comp.chain1_resis:
                                         comp.chain1_resis.append(atm1.get_parent().get_resname())
-                                        aa_observed[atm1.get_parent().get_resname()]+=1
+                                        #aa_observed[atm1.get_parent().get_resname()]+=1 #wyglada na nosnens bo nie zawsze zliczy sie do zaobserwowanych
                                     if atm2.get_parent().get_resname() not in comp.chain2_resis:
                                         comp.chain2_resis.append(atm2.get_parent().get_resname())
-                                        aa_observed[atm2.get_parent().get_resname()]+=1
+                                        #aa_observed[atm2.get_parent().get_resname()]+=1
                                     if atm1.get_name() not in comp.chain1_close_atms:
                                         comp.chain1_close_atms.append(atm1.get_name())
                                     
@@ -115,7 +124,10 @@ for pdb_file in files:#os.listdir(path):
                                     
                                     pair1 = (atm1.get_parent().get_resname() , atm2.get_parent().get_resname()) 
                                     pair2 = (atm2.get_parent().get_resname() , atm1.get_parent().get_resname())
-
+                                    ''' 
+                                    aa_observed[atm1.get_parent().get_resname()]+=1
+                                    aa_observed[atm2.get_parent().get_resname()]+=1
+                                    '''
                                     if pair1 in pairs_occurence:
                                         pairs_occurence[pair1] += 1
                                         pair_counter += 1
@@ -127,20 +139,12 @@ for pdb_file in files:#os.listdir(path):
                                         pair_counter += 1
                 
                 if len(comp.chain1_resis) == 0 or len(comp.chain2_resis) == 0:
-                    print ' No atoms in distance <= 10 Angstremes for ' + chains[ch1].get_full_id()[2] + ' and ' + chains[ch2].get_full_id()[2] + ' chains' + '\n'
+                    continue
+                    #print ' No atoms in distance <= 10 Angstremes for ' + chains[ch1].get_full_id()[2] + ' and ' + chains[ch2].get_full_id()[2] + ' chains' + '\n'
                 else:
                     
                     comprasions.append(comp)
-
-                    print 'Residues and atoms in distance <= 10 Angstremes for ' + chains[ch1].get_full_id()[2] + ' and ' + chains[ch2].get_full_id()[2] + ' chains' + '\n'
-                    print comp.chain1_resis #close residues from 1st chain
-                    print ""
-                    print comp.chain1_close_atms #close atoms from 1st chain
-                    print "\n"
-                    print comp.chain2_resis
-                    print ''
-                    print comp.chain2_close_atms
-
+                    
                     
                     for r1 in comp.chain1_resis:
                         if r1 not in res_ids_onclose:
@@ -175,6 +179,7 @@ for data in pairs_occurence:
 #print pairs_occurence_inlist
 print str(sumka)
 convert_to_percentage(pairs_occurence,aa_observed,sum(aa_observed.values()))
+
 
 ''' TODO
 
