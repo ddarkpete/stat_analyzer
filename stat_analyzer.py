@@ -27,7 +27,7 @@ class Comprassion:
 def percentage(x , _all):
     return (float(x) / float(_all)) * 100
 
-def convert_to_percentage(occ_list, amino_count, _all):
+def convert_to_stat(occ_list, amino_count, _all):
     save_file = open('stats.txt', 'w')
     save_file2 = open('aa_observed.txt', 'w')
     save_file2.write(str( amino_count))
@@ -65,7 +65,7 @@ pairs_occurence = {}
 analyzed_count = 0
 pair_counter = 0
 
-
+def
 
 
 for pdb_file in files: #iteracja po plikach pdb
@@ -104,25 +104,22 @@ for pdb_file in files: #iteracja po plikach pdb
 
                 for atm1 in chain1_atms:
                     if atm1.get_name() == 'CB' and atm1.get_parent().get_resname() in standard_aa_names:
-                        #print 'CB atom 1'
                         for atm2 in chain2_atms:
                             if atm2.get_name() == 'CB' and atm2.get_parent().get_resname() in standard_aa_names:
-                                #print 'cb atom 2'
                                 if atm1 - atm2 <= 15.0:
-                                    #print atm1.get_name() + ' ' + atm2.get_name()
-                                    if atm1.get_parent().get_resname() not in comp.chain1_resis:
+                                    if atm1.get_parent().get_resname() not in comp.chain1_resis:#to chyba bez sensu
                                         comp.chain1_resis.append(atm1.get_parent().get_resname())
-                                        #aa_observed[atm1.get_parent().get_resname()]+=1 #wyglada na nosnens bo nie zawsze zliczy sie do zaobserwowanych
+                                    
                                     if atm2.get_parent().get_resname() not in comp.chain2_resis:
                                         comp.chain2_resis.append(atm2.get_parent().get_resname())
-                                        #aa_observed[atm2.get_parent().get_resname()]+=1
+                                    
                                     if atm1.get_name() not in comp.chain1_close_atms:
                                         comp.chain1_close_atms.append(atm1.get_name())
                                     
                                     if atm2.get_name() not in comp.chain2_close_atms:
                                         comp.chain2_close_atms.append(atm2.get_name())
                                     
-                                    pair1 = (atm1.get_parent().get_resname() , atm2.get_parent().get_resname()) 
+                                    pair1 = (atm1.get_parent().get_resname() , atm2.get_parent().get_resname())#pytanie czy nie powinno byc sprawdzenia czy jedna reszta tworzy jedna pare 
                                     pair2 = (atm2.get_parent().get_resname() , atm1.get_parent().get_resname())
                                     ''' 
                                     aa_observed[atm1.get_parent().get_resname()]+=1
@@ -140,7 +137,6 @@ for pdb_file in files: #iteracja po plikach pdb
                 
                 if len(comp.chain1_resis) == 0 or len(comp.chain2_resis) == 0:
                     continue
-                    #print ' No atoms in distance <= 10 Angstremes for ' + chains[ch1].get_full_id()[2] + ' and ' + chains[ch2].get_full_id()[2] + ' chains' + '\n'
                 else:
                     
                     comprasions.append(comp)
@@ -151,14 +147,12 @@ for pdb_file in files: #iteracja po plikach pdb
                             res_ids_onclose[r1] = 1
                         else:
                             res_ids_onclose[r1] += 1
-                    #print ''
-                    #print chain2_close
+
                     for r2 in comp.chain2_resis:
                         if r2 not in res_ids_onclose:
                             res_ids_onclose[r2] = 1
                         else:
                             res_ids_onclose[r2] += 1
-                    #print ''
                     break
   
 print'\n\n\n\n'          
@@ -178,11 +172,6 @@ for data in pairs_occurence:
     sumka += data[1]
 #print pairs_occurence_inlist
 print str(sumka)
-convert_to_percentage(pairs_occurence,aa_observed,sum(aa_observed.values()))
+convert_to_stat(pairs_occurence,aa_observed,sum(aa_observed.values()))
 
 
-''' TODO
-
--Do przekazania slownik do drugiego pliku z licznoscia aminokwasow
--dalsza implementacja wzoru w sensie tego wyliczjacego expected
--poten ten logarytmem '''
