@@ -1,5 +1,7 @@
 import warnings
 warnings.filterwarnings("ignore")
+import sys
+import csv
 
 from Bio.PDB import *
 from Bio.PDB.Atom import Atom 
@@ -44,7 +46,7 @@ def aa_observed_reader():
     return observed_aas
 
 
-path = "./models_to_score/7cat_pyry_out_20k/"
+path = sys.argv[1]
 
 #model.stats = {}
 
@@ -56,10 +58,9 @@ standard_aa_names = ["ALA", "CYS", "ASP", "GLU", "PHE", "GLY", "HIS", "ILE", "LY
 #print str(len(standard_aa_names)) + 'aminos'
 
 stats = stat_reader()
-#print stats
+
 aa_observed = aa_observed_reader()
-#print aa_observed
-#print'************************************'
+
 pair_counter = 0.0
 
 all_models_stats = []
@@ -122,7 +123,7 @@ for pdb_file in files:#os.listdir(path):
     for pair in model.stats:
         #model.stats[pair] = percentage(model.stats[pair] , pair_counter)
         if pair in stats:#a co jak nie ?
-            model.stats[pair] = log10(float(model.stats[pair]) / float(stats[pair]))
+            model.stats[pair] = log10(float(model.stats[pair]) / float(stats[pair])) #log10()
         else:
             #print pair
             blacklist.append(pair)
@@ -148,11 +149,18 @@ for pdb_file in files:#os.listdir(path):
 
 for am in all_models_stats:
     print "\n" + am.name + "\n"
+    '''
     for ms , ms_val in am.stats.iteritems():
         print str(ms) +  ' ' + str(ms_val)
+    '''
     print "\n model score : " + str(am.score) + '\n' 
 
-print str(len(all_models_stats))
+with open(path + 'scores.csv', 'wb') as csv_file:
+    writer = csv.writer(csv_file)
+    for am in all_models_stats:
+       writer.writerow([am.name, am.score])
+csv_file.close()
+
 
 
 

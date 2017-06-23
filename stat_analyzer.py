@@ -53,7 +53,7 @@ aa_observed = {'ALA' : 0 , 'CYS' : 0 , 'ASP' : 0 , 'GLU' : 0 , 'PHE' : 0 , 'GLY'
                      'TRP' : 0 , 'TYR' : 0 }
 
 
-path = "./pdbs/"
+path = "./pdbs/pdbs/"
 
 print os.listdir(path)
 files = [f for f in os.listdir(path) if os.path.isfile(join(path,f)) and '.pdb' in f]

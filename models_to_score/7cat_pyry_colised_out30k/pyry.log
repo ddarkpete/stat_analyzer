@@ -1,0 +1,81 @@
+Scoring function will penalyze shape filling twice since you defined two parameters: DENSITY and MAP_FREESPACE!
+ANNTEMP.................... 1.0
+CHI2_PENALTY.................... [0.0, 0.0]
+CLASHES_PENALTY.................... [1.0, 1.0]
+COMPONENTS_INDEXES.................... {}
+CRYSOL_PATH.................... 
+CURVE.................... None
+DENSITY_PENALTY.................... [1.0, 1.0]
+DISABLED_MUTATIONS.................... ['translation', 'exchange', 'SimulateDisorder']
+EXCHANGE_FREQ.................... 0.0
+EXCHANGEANDSAMPLE_FREQ.................... 0.0
+FREESPACE_PENALTY.................... [1.0, 1.0]
+IDENTIFY_DISORDERS.................... False
+IS_CHI2_DEFINED.................... False
+IS_DENSITY_DEFINED.................... True
+IS_FREESPACE_DEFINED.................... True
+IS_RG_PENALTY_DEFINED.................... False
+ITER_NR.................... 0
+KVOL.................... None
+KVOL_GIVEN.................... False
+LINKED_COMPONENTS.................... {}
+MAX_ROT_ANGLE.................... 5.0
+MAX_TRANS_VEC.................... [5.0, 5.0, 5.0]
+MAXPOOLSIZE.................... 100
+MOVABLE.................... []
+MOVEHISTORY.................... 
+MUTATION_FREQUENCIES.................... {'SimulateDisorder': 0.0, 'translation_all': 0.25, 'rotation_all': 0.25, 'exchange': 0.0, 'rotation': 0.25, 'translation': 0.0, 'rotation_cov': 0.25}
+NITER.................... 2000
+OUT_STEPS.................... []
+OUTBOX_PENALTY.................... [1.0, 1.0]
+PARAM_SCALING.................... on
+PARAM_SCALING_RANGE1.................... [0.5, 1.0]
+PARAM_SCALING_RANGE2.................... [0.25, 0.5]
+PARAM_SCALING_RANGE3.................... [0.0, 0.25]
+PARAM_SCALING_RANGES.................... [0.0, 0.25, 0.5]
+REDUCTMETHOD.................... Roulette
+REHEAT.................... False
+REHEAT_REJECTIONS.................... 1.0
+REPL_EXCH_FREQ.................... False
+REPLICA_EXCHANGE_FREQ.................... 3000
+REPLICA_TEMPS.................... [400, 350, 300, 250, 200, 150, 100, 50, 25, 0]
+REPRESENTATION.................... fa
+REQUIRED_CLASHES_PENALTY.................... True
+REQUIRED_CLASHES_PENALTY_ALLATOMS.................... False
+RESTRAINTS_PENALTY.................... [1.0, 1.0]
+RG_PENALTY.................... [0.0, 0.0]
+RG_VAL.................... 0.0
+ROTATION_ALL_FREQ.................... 0.25
+ROTATION_COV_FREQ.................... 0.25
+ROTATION_FREQ.................... 0.25
+ROTATION_WHOLE_FREQ.................... 0.0
+SAVE_RES_MODE.................... niter
+SAXSRADIUS.................... 0.0
+SCALING_RANGES.................... [[50, 100], [25, 50], [0, 25], [0.5, 1.0], [0.25, 0.5], [0.0, 0.25]]
+SHAPEDESC.................... True
+SIMBOX.................... 1.4
+SIMBOXRADIUS.................... 1.0
+SIMGRIDTYPE.................... cubic
+SIMMETHOD.................... simulatedannealing
+SIMUL_DD_FREQ.................... 0.0
+SIMUL_STEPS.................... 30000
+START_ORIENT.................... True
+STRUCT_NR.................... 1
+SYMMETRY_PENALTY.................... [0.0, 0.0]
+THRESHOLD.................... 0.0
+THRESHOLD_GIVEN.................... True
+TRANSLATION_ALL_FREQ.................... 0.25
+TRANSLATION_FREQ.................... 0.0
+WRITE_EACHBETTER.................... False
+cx score for iteration 0 -122.01 components: restraints: -0 collisions: -47.7912 map filling: -5.84022e-14 outbox atoms: 0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 1959 -65.9396 components: restraints: -0 collisions: -0 map filling: -65.9396 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 3832 -65.8355 components: restraints: -0 collisions: -0 map filling: -65.8355 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 5202 -65.7821 components: restraints: -0 collisions: -0 map filling: -65.7821 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 7688 -65.7795 components: restraints: -0 collisions: -0 map filling: -65.7795 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 8184 -65.7782 components: restraints: -0 collisions: -0 map filling: -65.7782 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 10247 -65.7769 components: restraints: -0 collisions: -0 map filling: -65.7769 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 13748 -65.7756 components: restraints: -0 collisions: -0 map filling: -65.7756 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 15889 -65.7431 components: restraints: -0 collisions: -0 map filling: -65.7431 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 17639 -65.7262 components: restraints: -0 collisions: -0 map filling: -65.7262 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+cx score for iteration 24325 -65.7249 components: restraints: -0 collisions: -0 map filling: -65.7249 outbox atoms: -0 density filling: 0 symmetry penalty: -0 chi2 penalty: 0 rg penalty: 0
+Rejected	-65.7248840332	iter_nr	30000
